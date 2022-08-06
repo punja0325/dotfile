@@ -79,7 +79,6 @@ set nofoldenable " disable folding by default
 "--------------------
 " Personal configurations
 "--------------------
-
 let mapleader = " "
 nnoremap H ^
 vnoremap H ^
