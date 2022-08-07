@@ -79,11 +79,22 @@ set nofoldenable " disable folding by default
 "--------------------
 " Personal configurations
 "--------------------
-let mapleader = " "
-nnoremap H ^
-vnoremap H ^
-nnoremap L $
-vnoremap L $
+let mapleader = ","
+inoremap jj <ESC>
+"nnoremap H ^
+"vnoremap H ^
+"nnoremap L $
+"vnoremap L $
+"
+" Delete without yank
+nnoremap x "_x
+nnoremap d "_d
+nnoremap D "_D
+vnoremap d "_d
+
+" highlight tailing whitespace
+highlight WhitespaceEOL ctermbg=red guibg=red
+match WhitespaceEOL /\s\+$/
 
 "--------------------
 " Misc configurations
@@ -164,6 +175,7 @@ endif
 nnoremap ; :CtrlPBuffer<CR>
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_show_hidden = 1
+let g:ctrlp_root_maker = ['.ctrlp']
 
 " ag / ack.vim
 command -nargs=+ Gag Gcd | Ack! <args>
@@ -173,7 +185,8 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
-" syntastic
+" TODO: dbg this plugin
+let g:syntastic_c_compiler =['clang']
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_wq = 0
@@ -203,6 +216,7 @@ map zg/ <Plug>(incsearch-easymotion-stay)
 " argwrap
 nnoremap <Leader>w :ArgWrap<CR>
 
+" vim-over
 noremap <Leader>x :OverCommandLine<CR>
 
 " markdown
@@ -221,12 +235,17 @@ let g:markdown_fenced_languages = [
     \ 'racket',
     \ 'haskell',
     \ 'rust',
-\]
+    \]
 let g:markdown_syntax_conceal = 0
 let g:markdown_folding = 1
 
 " fugitive
 set tags^=.git/tags;~
+
+" lightline
+let g:lightline = {
+    \ 'colorscheme': 'wombat',
+    \}
 
 "---------------------
 " Local customizations
