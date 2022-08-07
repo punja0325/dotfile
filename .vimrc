@@ -175,7 +175,7 @@ endif
 nnoremap ; :CtrlPBuffer<CR>
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_show_hidden = 1
-let g:ctrlp_root_maker = ['.ctrlp']
+let g:ctrlp_root_maker = [".ctrlp"]
 
 " ag / ack.vim
 command -nargs=+ Gag Gcd | Ack! <args>
@@ -185,20 +185,8 @@ if executable('ag')
     let g:ackprg = 'ag --vimgrep'
 endif
 
-" TODO: dbg this plugin
-let g:syntastic_c_compiler =['clang']
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_wq = 0
-let g:syntastic_mode_map = {
-    \ 'mode': 'passive',
-    \ 'active_filetypes': [],
-    \ 'passive_filetypes': []
-\}
-nnoremap <Leader>s :SyntasticCheck<CR>
-nnoremap <Leader>r :SyntasticReset<CR>
-nnoremap <Leader>i :SyntasticInfo<CR>
-nnoremap <Leader>m :SyntasticToggleMode<CR>
+" ALE
+"
 
 " easymotion
 map <Space> <Plug>(easymotion-prefix)
@@ -246,10 +234,41 @@ set tags^=.git/tags;~
 let g:lightline = {
     \ 'colorscheme': 'wombat',
     \}
+" fzf.vim
+nmap <leader><tab> <plug>(fzf-maps-n)
+nmap <leader>ff :Files<CR>
+nmap <leader>fb :BLines<CR>
+nmap <leader>ft :Tags<CR>
+nmap <leader>fn :BTags<CR>
 
-"---------------------
-" Local customizations
-"---------------------
+" vim-rooter
+let g:rooter_patterns = ['.root']
+
+" ctgas
+" Auto Update Ctags
+function! DelTagOfFile(file)
+    let fullpath = a:file
+    let cwd = getcwd()
+    let tagfilename = cwd . "/tags"
+    let f = substitute(fullpath, cwd . "/", "", "")
+    let f = escape(f, './')
+    let cmd = 'sed -i "/' . f . '/d" "' . tagfilename . '"'
+    let resp = system(cmd)
+endfunction
+
+function! UpdateTags()
+    let f = expand("%:p")
+    let cwd = getcwd()
+    let tagfilename = cwd . "/tags"
+    let cmd = 'ctags -a -f ' . tagfilename . ' --c++-kinds=+p --fields=+iaS --extra=+q ' . '"' . f . '"'
+    call DelTagOfFile(f)
+    let resp = system(cmd)
+endfunction
+autocmd BufWritePost *.cpp,*.h,*.c call UpdateTags()
+
+"--------------------- e
+" Local customizations" "
+"---------------------" "
 
 " local customizations in ~/.vimrc_local
 let $LOCALFILE=expand("~/.vimrc_local")

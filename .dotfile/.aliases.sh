@@ -2,10 +2,11 @@
 alias cc='clear'
 alias q='exit'
 
-alias cdb='cd -'
+alias cdb='cd'
 alias cddl='cd ~/Downloads && la'
 alias cddoc='cd ~/Documents && la'
 alias cdapp='cd ~/Application && la'
+alias cddsk='cd ~/Desktop && la'
 
 alias src='source ~/.zshrc'
 alias vsrc='vim ~/.zshrc'
@@ -26,6 +27,12 @@ alias rm='rm -r'
 
 # git related aliases
 alias gag='git exec ag'
+
+# Application aliases
+alias python='/usr/bin/python3.10'
+
+# fzf function
+source $HOME/.dotfile/.fzf_fun.sh
 
 # Update dotfiles
 dfu() {

@@ -1,0 +1,8 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =6
+let g:netrw_dirhist_6='/home/punja'
+let g:netrw_dirhist_5='/home/punja/.vim'
+let g:netrw_dirhist_4='/home/punja/.dotfile/.tmux'
+let g:netrw_dirhist_3='/home/punja/.dotfile'
+let g:netrw_dirhist_2='/home/punja/.oh-my-zsh'
+let g:netrw_dirhist_1='/home/punja/.ssh'
